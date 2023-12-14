@@ -12,6 +12,7 @@ class Driver(models.Model):
         self.car_number = self.car_number.upper()
         super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
 
+
 class Item(models.Model):
     transmitter_id = models.CharField(verbose_name='ID передатчика', max_length=50, null=True, blank=True)  # Добавленное поле
     latitude = models.DecimalField(verbose_name='Широта', max_digits=9, decimal_places=6)  # Широта

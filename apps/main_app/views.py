@@ -18,7 +18,7 @@ def handle_data(request):
         speed = request.POST.get('speed', '')
 
         try:
-            data_object = Item(
+            data_object = Item.objects.create(
                 transmitter_id=transmitter_id,
                 latitude=latitude,
                 longitude=longitude,
