@@ -8,9 +8,12 @@ from apps.main_app.serializers import ItemSerializer, DriverSerializer
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from core.logger_settings import service_logger
+
 @csrf_exempt
 def handle_data(request):
     if request.method == 'POST':
+        service_logger.info(f"Recive request with body --> {request.POST}")
         transmitter_id = request.POST.get('transmitter_id', '')
         latitude = request.POST.get('latitude', '')
         longitude = request.POST.get('longitude', '')
