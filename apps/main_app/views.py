@@ -5,8 +5,6 @@ from apps.main_app.models import Item, Driver
 from apps.main_app.serializers import GpsDataSerializer, ItemSerializer, DriverSerializer
 
 from rest_framework.views import APIView
-from rest_framework.decorators import action
-from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
 from core.logger_settings import service_logger
@@ -14,7 +12,7 @@ from core.logger_settings import service_logger
 
 class GpsDataView(APIView):
     serializer_class = GpsDataSerializer
-
+    @csrf_exempt
     @swagger_auto_schema(request_body=GpsDataSerializer)
     def post(self, request):
         if request.method == 'POST':
