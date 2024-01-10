@@ -2,39 +2,44 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 
 from apps.main_app.models import Item, Driver
-from apps.main_app.serializers import ItemSerializer, DriverSerializer
+from apps.main_app.serializers import GpsDataSerializer, ItemSerializer, DriverSerializer
 
-
-from django.http import HttpResponse
+from rest_framework.views import APIView
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
-
+from drf_yasg.utils import swagger_auto_schema
 from core.logger_settings import service_logger
 
-@csrf_exempt
-def handle_data(request):
-    if request.method == 'POST':
-        service_logger.info(f"Recive request with body --> {request.POST}")
-        transmitter_id = request.POST.get('transmitter_id', '')
-        latitude = request.POST.get('latitude', '')
-        longitude = request.POST.get('longitude', '')
-        direction = request.POST.get('direction', '')
-        speed = request.POST.get('speed', '')
 
-        try:
-            data_object = Item.objects.create(
-                transmitter_id=transmitter_id,
-                latitude=latitude,
-                longitude=longitude,
-                direction=direction,
-                speed=speed
-            )
-            data_object.save()
+class GpsDataView(APIView):
+    serializer_class = GpsDataSerializer
 
-            return HttpResponse('Data received and saved successfully')
-        except Exception as e:
-            return HttpResponse(f'Error: {e}')
+    @swagger_auto_schema(request_body=GpsDataSerializer)
+    def post(self, request):
+        if request.method == 'POST':
+            service_logger.info(f"Recive request with body --> {request.data}")
+            transmitter_id = request.POST.get('transmitter_id', '')
+            latitude = request.POST.get('latitude', '')
+            longitude = request.POST.get('longitude', '')
+            direction = request.POST.get('direction', '')
+            speed = request.POST.get('speed', '')
+            
+            try:
+                data_object = Item.objects.create(
+                    transmitter_id=transmitter_id,
+                    latitude=latitude,
+                    longitude=longitude,
+                    direction=direction,
+                    speed=speed
+                )
+                data_object.save()
 
-    return HttpResponse('Invalid request method')
+                return Response('Data received and saved successfully')
+            except Exception as e:
+                return Response(f'Error: {e}')
+
+        return Response('Invalid request method')
 
 class ItemView(ModelViewSet):
     queryset = Item.objects.all()

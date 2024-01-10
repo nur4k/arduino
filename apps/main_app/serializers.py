@@ -13,3 +13,11 @@ class DriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = Driver
         fields = ('id', 'fio', 'car_number')
+
+
+class GpsDataSerializer(serializers.Serializer):
+    transmitter_id = serializers.FloatField()
+    latitude = serializers.FloatField()
+    longitude = serializers.FloatField()
+    direction = serializers.FloatField()
+    speed = serializers.FloatField()
