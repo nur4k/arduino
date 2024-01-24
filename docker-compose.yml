@@ -43,8 +43,8 @@ services:
   nginx:
     image: nginx
     volumes:
-      - media:/media
-      - static:/static
+      - media:/media/
+      - static:/static/
     configs:
       - source: nginx.conf
         target: /etc/nginx/nginx.conf
