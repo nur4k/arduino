@@ -15,29 +15,23 @@ class GpsDataView(APIView):
     @csrf_exempt
     @swagger_auto_schema(request_body=GpsDataSerializer)
     def post(self, request):
-        if request.method == 'POST':
-            service_logger.info(f"Recive request with body --> {request.data}")
-            transmitter_id = request.POST.get('transmitter_id', '')
-            latitude = request.POST.get('latitude', '')
-            longitude = request.POST.get('longitude', '')
-            direction = request.POST.get('direction', '')
-            speed = request.POST.get('speed', '')
-            
-            try:
-                data_object = Item.objects.create(
-                    transmitter_id=transmitter_id,
-                    latitude=latitude,
-                    longitude=longitude,
-                    direction=direction,
-                    speed=speed
-                )
-                data_object.save()
 
-                return Response('Data received and saved successfully')
-            except Exception as e:
-                return Response(f'Error: {e}')
-
-        return Response('Invalid request method')
+        service_logger.info(f"Recive request with body --> {request.data}")
+        # transmitter_id = request.POST.get('transmitter_id', '')
+        # latitude = request.POST.get('latitude', '')
+        # longitude = request.POST.get('longitude', '')
+        # direction = request.POST.get('direction', '')
+        # speed = request.POST.get('speed', '')
+        
+        # data_object = Item.objects.create(
+        #     transmitter_id=transmitter_id,
+        #     latitude=latitude,
+        #     longitude=longitude,
+        #     direction=direction,
+        #     speed=speed
+        # )
+        # data_object.save()
+        return Response("success")
 
 class ItemView(ModelViewSet):
     queryset = Item.objects.all()
