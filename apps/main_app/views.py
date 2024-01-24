@@ -17,21 +17,13 @@ class GpsDataView(APIView):
     def post(self, request):
 
         service_logger.info(f"Recive request with body --> {request.data}")
-        # transmitter_id = request.POST.get('transmitter_id', '')
-        # latitude = request.POST.get('latitude', '')
-        # longitude = request.POST.get('longitude', '')
-        # direction = request.POST.get('direction', '')
-        # speed = request.POST.get('speed', '')
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
         
-        # data_object = Item.objects.create(
-        #     transmitter_id=transmitter_id,
-        #     latitude=latitude,
-        #     longitude=longitude,
-        #     direction=direction,
-        #     speed=speed
-        # )
-        # data_object.save()
-        return Response("success")
+        
+        
+        data_object = Item.objects.create(**serializer.validated_data)
+        return Response(data_object)
 
 class ItemView(ModelViewSet):
     queryset = Item.objects.all()
