@@ -17,6 +17,33 @@ setuptools = "^69.0.2"
 loguru = "^0.7.2"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^23.12.1"
+mypy = "^1.8.0"
+isort = "^5.13.2"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.black]
+profile = "black"
+extend-exclude = "migrations"
+
+[tool.mypy]
+exclude = "(migrations|settings|manage.py|manage_dev.py)"
+strict = true
+ignore_missing_imports = true
+allow_subclassing_any = true
+allow_untyped_calls = true
+pretty = true
+show_error_codes = true
+implicit_reexport = true
+allow_untyped_decorators = true
+warn_unused_ignores = false
+warn_return_any = false
+namespace_packages = true
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

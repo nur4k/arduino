@@ -3,9 +3,8 @@ from rest_framework.routers import DefaultRouter
 
 from apps.users.views import UserView
 
-
 router = DefaultRouter()
-router.register('user', UserView)
+router.register("user", UserView)
 
 urlpatterns = []
 
