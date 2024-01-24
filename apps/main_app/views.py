@@ -19,11 +19,8 @@ class GpsDataView(APIView):
         service_logger.info(f"Recive request with body --> {request.data}")
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        
-        
-        
-        data_object = Item.objects.create(**serializer.validated_data)
-        return Response(data_object)
+        Item.objects.create(**serializer.validated_data)
+        return Response("success")
 
 class ItemView(ModelViewSet):
     queryset = Item.objects.all()
