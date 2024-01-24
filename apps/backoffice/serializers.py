@@ -25,7 +25,7 @@ class DriverSerializer(serializers.ModelSerializer):
 
 
 class GpsDataSerializer(serializers.Serializer):
-    transmitter_id = serializers.FloatField()
+    transmitter_id = serializers.IntegerField()
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
     direction = serializers.FloatField()
