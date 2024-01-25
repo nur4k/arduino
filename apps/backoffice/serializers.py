@@ -30,10 +30,8 @@ class GpsDataSerializer(serializers.Serializer):
     longitude = serializers.FloatField()
     direction = serializers.FloatField()
     speed = serializers.FloatField()
-    {
-        "transmitter_id": 1,
-        "latitude": 41.41,
-        "longitude": 72.43,
-        "direction": 0,
-        "speed": 0,
-    }
+
+
+class GpsTestSerializer(serializers.Serializer):
+    test_text = serializers.CharField()
+    test_int = serializers.IntegerField(required=False)
