@@ -10,7 +10,6 @@ from apps.backoffice.serializers import (
     DriverSerializer,
     GisSerializer,
     GpsDataSerializer,
-    GpsTestSerializer,
 )
 from core.logger_settings import service_logger
 
@@ -19,23 +18,12 @@ class GpsDataView(APIView):
     serializer_class = GpsDataSerializer
 
     @csrf_exempt
-    # @swagger_auto_schema(request_body=GpsDataSerializer)
+    @swagger_auto_schema(request_body=GpsDataSerializer)
     def post(self, request: Request) -> Response:
         service_logger.info(f"Recive request with body --> {request.data}")
-        # serializer = self.serializer_class(data=request.data)
-        # serializer.is_valid(raise_exception=True)
-        # GIS.objects.create(**serializer.validated_data)
-        return Response("success")
-
-
-class GpsTestView(APIView):
-    serializer_class = GpsTestSerializer
-
-    @csrf_exempt
-    @swagger_auto_schema(request_body=GpsTestSerializer)
-    def post(self, request: Request) -> Response:
-        service_logger.info(f"Recive test request with body --> {request.data}")
-        self.serializer_class(data=request.data)
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        GIS.objects.create(**serializer.validated_data)
         return Response("success")
 
 

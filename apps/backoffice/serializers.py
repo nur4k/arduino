@@ -30,8 +30,3 @@ class GpsDataSerializer(serializers.Serializer):
     longitude = serializers.FloatField()
     direction = serializers.FloatField()
     speed = serializers.FloatField()
-
-
-class GpsTestSerializer(serializers.Serializer):
-    test_text = serializers.CharField()
-    test_int = serializers.IntegerField(required=False)
