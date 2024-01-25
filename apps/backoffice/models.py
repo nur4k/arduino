@@ -23,9 +23,7 @@ class Driver(models.Model):
 
 
 class GIS(models.Model):
-    transmitter_id = models.CharField(
-        verbose_name="ID передатчика", max_length=50, null=True, blank=True
-    )  # Добавленное поле
+    transmitter_id = models.IntegerField(verbose_name="ID передатчика")
     latitude = models.FloatField(verbose_name="Широта", null=True)  # Широта
     longitude = models.FloatField(verbose_name="Долгота", null=True)  # Долгота
     direction = models.FloatField(verbose_name="Направле", null=True)  # Направление
