@@ -11,8 +11,8 @@ services:
     depends_on:
       - database
     volumes:
-      - media:/media/
-      - static:/static/
+      - media:/app/media/
+      - static:/app/static/
     env_file:
       - .env
 
@@ -43,8 +43,8 @@ services:
   nginx:
     image: nginx
     volumes:
-      - media:/media/
-      - static:/static/
+      - media:/app/media/
+      - static:/app/static/
     configs:
       - source: nginx.conf
         target: /etc/nginx/nginx.conf
