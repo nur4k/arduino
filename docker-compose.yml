@@ -41,10 +41,13 @@ services:
       - .env
 
   nginx:
-    image: nginx
+    image: nginx:alpine
+    restart: always
+    container_name: nginx
     volumes:
       - media:/app/media/
       - static:/app/static/
+      - ../gps/build:/usr/share/nginx/html
     configs:
       - source: nginx.conf
         target: /etc/nginx/nginx.conf
